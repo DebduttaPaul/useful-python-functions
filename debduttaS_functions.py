@@ -4,36 +4,6 @@ This python script contains a list of python functions that are useful in data a
 Each function has explanations in the beginning to understand the basic functionality.
 
 Some functions are used in carrying out general operations in others, hence all have been included here.
-The ones that might be useful for working with CZTI data are:
-
-01) rebin
-02) my_range
-03) mkdir_p
-04) fourier_transform
-05) my_histogram
-06) create_dph
-07) redefine_boundaries
-08) Q2D
-09) Q2any
-10) D2Q
-11)	Q2full
-12) modid_pixid_to_detx_dety
-13) renormalization
-14) reduced_chisquared
-15) create_lightcurves
-16) create_lightcurves_with_livetime_correction
-17) detect_peaks
-18) GRB_band
-19) GRB_powerlaw
-20) subtract_continuum
-21)	fit_a_poisson
-22)	fit_a_gaussian
-23) flag_pixels
-24)	stats_over_array
-25) create_full_DPH
-26) veto_channel2energy
-27) bin_secondary_along_primary_axis
-28) my_histogram_according_to_given_integers
 
 Instructions to use this script
 --------------------------------
@@ -45,7 +15,7 @@ if the function "detect_peaks" is to be used, it can be called thus: "df.detect_
 
 
 Author:			Debdutta Paul
-Last updated:	13th September, 2016
+Last updated:	14th November, 2016
 
 """
 
@@ -59,21 +29,18 @@ from astropy.table import Table
 from scipy.misc import factorial as fact
 from scipy import interpolate
 from scipy.optimize import curve_fit
-
-#~ plt.rc('axes', linewidth=2)
-#~ plt.rc('font', family='serif', serif='cm10')
-#~ plt.rc('text', usetex=True)
-#~ plt.rcParams['text.latex.preamble'] = [r'\boldmath']
-
-#	Ignoring silly warnings.
-warnings.filterwarnings("ignore")
+plt.rc('axes', linewidth=2)
+plt.rc('font', family='serif', serif='cm10')
+plt.rc('text', usetex=True)
+plt.rcParams['text.latex.preamble'] = [r'\boldmath']
 
 P = np.pi # Dear old pi!
 padding	 = 8 # The padding of the axes labels.
 size_font = 18 # The fontsize in the images.
 
 
-################################################################################################################################################################################
+
+#######################################################################################################################################################
 #	To define the various CZTI specifications.
 
 
@@ -90,19 +57,20 @@ total_number_of_pixels			=	number_of_pixels_2D_per_Quadrant * Q_n
 
 L_x = number_of_pixels_1D_per_Quadrant ; L_y = L_x
 
-#~ print '--------------------------------------------------------------------\n\n'
-#~ print 'Number of Quadrants:			' ,			Q_n
-#~ print 'Number of pixels 1D per Module:		' , number_of_pixels_1D_per_Module
-#~ print 'Number of pixels 2D per Module:		' , number_of_pixels_2D_per_Module
-#~ print 'Number of Modules 1D per Quadrant:	' , number_of_DMs_1D_per_Quadrant
-#~ print 'Number of Modules 2D per Quadrant:	' , number_of_DMs_2D_per_Quadrant
-#~ print 'Number of pixels 1D per Quadrant:	' , number_of_pixels_1D_per_Quadrant
-#~ print 'Number of pixels 2D per Quadrant:	' , number_of_pixels_2D_per_Quadrant
-#~ print 'Number of CZT pixels, 2D Total:		' , total_number_of_pixels
-#~ print '\n\n--------------------------------------------------------------------\n\n\n\n\n\n\n\n\n'
+
+print '--------------------------------------------------------------------\n\n'
+print 'Number of Quadrants:			' ,			Q_n
+print 'Number of pixels 1D per Module:		' , number_of_pixels_1D_per_Module
+print 'Number of pixels 2D per Module:		' , number_of_pixels_2D_per_Module
+print 'Number of Modules 1D per Quadrant:	' , number_of_DMs_1D_per_Quadrant
+print 'Number of Modules 2D per Quadrant:	' , number_of_DMs_2D_per_Quadrant
+print 'Number of pixels 1D per Quadrant:	' , number_of_pixels_1D_per_Quadrant
+print 'Number of pixels 2D per Quadrant:	' , number_of_pixels_2D_per_Quadrant
+print 'Number of CZT pixels, 2D Total:		' , total_number_of_pixels
+print '\n\n--------------------------------------------------------------------\n\n\n\n\n\n\n\n\n'
 
 
-################################################################################################################################################################################
+#######################################################################################################################################################
 
 
 
@@ -149,8 +117,6 @@ def window( low, high, primary, secondary ):
 
 
 
-
-
 def delete( bigger, smaller ):
 	
 	
@@ -183,8 +149,6 @@ def delete( bigger, smaller ):
 	
 	
 	return deleted
-	
-
 
 
 
@@ -233,8 +197,6 @@ def in_array( array, value, margin ):
 
 
 
-
-
 def nearest( array, value ):
 	
 	
@@ -264,8 +226,6 @@ def nearest( array, value ):
 	index	=	np.where( diff == minimum )[0][0]
 	
 	return index
-	
-
 
 
 
@@ -294,8 +254,6 @@ def std_via_mad( array ):
 	std	=	1.4826 * mad
 	
 	return std
-
-
 
 
 
@@ -338,8 +296,6 @@ def rebin( array, intervals ):
 
 
 
-
-
 def my_range( array ):
 	
 	
@@ -362,7 +318,6 @@ def my_range( array ):
 	range_of_array = np.max(array) - np.min(array)	
 	
 	return range_of_array
-
 
 
 
@@ -396,7 +351,6 @@ def mkdir_p( my_path ):
             pass
         else: raise
         return
-
 
 
 
@@ -456,7 +410,6 @@ def gaussian( x, mu, sigma, coeff ):
 
 
 
-
 def fourier_transform( x, y ):
 	
 	
@@ -501,7 +454,6 @@ def fourier_transform( x, y ):
 
 
 
-
 def mid_array( input_array ):
 	
 	
@@ -533,7 +485,6 @@ def mid_array( input_array ):
 
 
 
-
 def distance( p1, p2 ):
 	
 	
@@ -557,8 +508,6 @@ def distance( p1, p2 ):
 	d = np.sqrt(d)
 	
 	return d
-
-
 
 
 
@@ -591,9 +540,6 @@ def radian_to_degree( angle_in_radian ):
 
 
 
-
-
-
 def degree_to_radian (angle_in_degree ):
 	
 	
@@ -622,10 +568,45 @@ def degree_to_radian (angle_in_degree ):
 
 
 
+def my_histogram_according_to_given_boundaries( array, bin_size, low, high ):
+	
+	
+	'''
+	
+	
+	Parameters
+	-----------
+	array	:	Array, which contains only integer values, which is to be histogram-ed according to these histograms.
+	bin_size:	The size of the bin for making the histogram.
+	low		:	The lower boundary of the histogram.
+	high	:	The upper boundary of the histogram.
+	
+	Returns
+	-----------
+	x:		The x-axis of the required histogram.
+	x:		The y-axis of the required histogram.
+	
+	
+	'''
+	
+	
+	array	=	np.sort( array )
+	bin_edges	=	np.arange( low, high+bin_size/2, bin_size )
+	x	=	mid_array( bin_edges )
+	
+	#	print array, bin_edges, x
+	
+	hist	=	np.histogram( array, bin_edges )
+	
+	y = hist[0]
+	
+	
+	return x, y
 
 
 
-def my_histogram( array, bin_size ):
+
+def my_histogram_with_last_bin_removed( array, bin_size ):
 	
 	
 	'''
@@ -640,6 +621,10 @@ def my_histogram( array, bin_size ):
 	-----------
 	x:			Array of rebinned elements.
 	y:			Array of same length, giving the number of events in the new bins.
+	
+	Assumes
+	-----------
+	The last bin has incomplete data and is to be ignored.
 	
 	
 	'''
@@ -670,11 +655,7 @@ def my_histogram( array, bin_size ):
 
 
 
-
-
-
-
-def create_dph(t, x, y, h):
+def create_DPH(t, x, y, h):
 	
 	
 	'''
@@ -682,16 +663,16 @@ def create_dph(t, x, y, h):
 	
 	Parameters
 	-----------
-	t:			Array of time instances over which image information is supplied.
-	x:			Array of corresponding detector X-coordinates.
-	y:			Array of corresponding detector Y-coordinates.
-	h:			Temporal resolution for creating DPHs.
+	t				:	Array of time instances of the events.
+	x				:	Array of corresponding detx.
+	y				:	Array of corresponding dety.
+	h				:	Temporal resolution for creating DPHs.
 	
 	Returns
 	-----------
-	  time_binned:		Time array, with binning according to "h".
-	counts_binned:		Counts array, corresponding to each element in "time_binned".
-	 image_binned:		Array of 2-D arrays, corresponding to each element in "time_binned", each 2-D array being a DPH of the full quadrant resolved at single pixels.
+	time_binned		:	Time array, with binning according to "h".
+	counts_binned	:	Counts array, corresponding to each element in "time_binned".
+	image_binned	:	Array of 2-D arrays, corresponding to each element in "time_binned", each 2-D array being a DPH of the full quadrant resolved at single pixels.
 	
 	Comments
 	-----------
@@ -703,9 +684,9 @@ def create_dph(t, x, y, h):
 	
 	T = my_range(t)
 	
-	N = int( T // h )
+	N = int( T // h + 1 )
 	
-	if N!= 0:
+	if N!= 1:
 		
 		t_lo = np.min(t)
 		t_hi = np.max(t)
@@ -765,11 +746,10 @@ def create_dph(t, x, y, h):
 			image[ (L_y-1)-y[k] , x[k] ] += 1
 		
 		image_binned	=	np.array( [image] )
-		
+	
 	
 	
 	return time_binned, counts_binned, image_binned
-
 
 
 
@@ -808,9 +788,6 @@ def redefine_boundaries( time_array, start_time, stop_time ):
 
 
 
-
-
-
 def Q2D( Q ):
 	
 	
@@ -840,8 +817,6 @@ def Q2D( Q ):
 			D[i, j]	=	np.sum( Q[ i*h : (i+1)*h, j*h : (j+1)*h ] )
 	
 	return D
-
-
 
 
 
@@ -882,8 +857,6 @@ def Q2any( Q, n ):
 
 
 
-
-
 def D2Q( D ):
 	
 	
@@ -910,9 +883,6 @@ def D2Q( D ):
 	Q[ Q_n:2*Q_n,   0:  Q_n ]	=	D[3]
 	
 	return Q
-
-
-
 
 
 
@@ -947,9 +917,6 @@ def Q2full( Q_DPHs ):
 
 
 
-
-
-
 def modid_pixid_to_detx_dety( quadid, detid, pixid ):
 	
 	
@@ -979,9 +946,6 @@ def modid_pixid_to_detx_dety( quadid, detid, pixid ):
 		detx	=	63 - detx
 	
 	return detx, dety
-
-
-
 
 
 
@@ -1045,8 +1009,6 @@ def renormalization( badpix_filename ):
 
 
 
-
-
 def reduced_chisquared( theoretical, observed, obs_err, constraints ):
 	
 	
@@ -1074,10 +1036,6 @@ def reduced_chisquared( theoretical, observed, obs_err, constraints ):
 	reduced_chisquared	=	chisqrd / dof
 		
 	return chisqrd, dof, reduced_chisquared
-
-
-
-
 
 
 
@@ -1147,12 +1105,6 @@ def create_lightcurves( evt_filename, t_start, t_stop, t_bin, t_offset, E_start,
 		Q_countrates[i]	=	temp/t_bin
 	
 	return Q_rebinnedtime, Q_countrates
-
-
-
-
-
-
 
 
 
@@ -1290,12 +1242,6 @@ def create_lightcurves_with_livetime_correction( evt_filename, lvt_filename, t_s
 
 
 
-
-
-
-
-
-
 def detect_peaks( x, y, x_search, significance ):
 	
 	
@@ -1347,9 +1293,11 @@ def detect_peaks( x, y, x_search, significance ):
 	# To calculate the global noise, via the MAD (Median Absolute Deviation).
 	cont_sub_y = y - median
 	med	=	np.median(cont_sub_y)
-	#~ std	=	np.median( np.abs(cont_sub_y - med) )
-	#~ std	=	1.4826 * std
+	
+	#	std	=	np.median( np.abs(cont_sub_y - med) )
+	#	std	=	1.4826 * std
 	std	=	np.std(cont_sub_y)
+	#	print std
 	
 	# To select the regions with huge peaks in the data.
 	r	=	np.where( cont_sub_y > ( significance*std + med ) )[0]
@@ -1357,13 +1305,8 @@ def detect_peaks( x, y, x_search, significance ):
 	y_around_peaks	=	y[r]
 	significance_of_peaks	=	cont_sub_y[r]/std
 	
-	return x_around_peaks, y_around_peaks, significance_of_peaks
-
-
-
-
-
-
+	
+	return r, x_around_peaks, y_around_peaks, significance_of_peaks
 
 
 
@@ -1402,8 +1345,6 @@ def GRB_band( E, alpha, beta, E_c, K ):
 
 
 
-
-
 def GRB_powerlaw( E, Gamma, K ):
 	
 	
@@ -1428,8 +1369,6 @@ def GRB_powerlaw( E, Gamma, K ):
 	
 	
 	return spec
-
-
 
 
 
@@ -1460,7 +1399,6 @@ def sort( primary, secondary ):
 	
 	
 	return p, s
-
 
 
 
@@ -1519,7 +1457,6 @@ def subtract_continuum( x, y, x_search ):
 
 
 
-
 def fit_a_poisson( x, y ):
 	
 	
@@ -1557,7 +1494,6 @@ def fit_a_poisson( x, y ):
 	
 	
 	return mean_best, coeff_best
-
 
 
 
@@ -1606,7 +1542,6 @@ def fit_a_gaussian( x, y ):
 
 
 
-
 def flag_pixels( dph, bad_x, bad_y ):
 	
 	
@@ -1637,7 +1572,6 @@ def flag_pixels( dph, bad_x, bad_y ):
 	
 	
 	return flagged_dph
-
 
 
 
@@ -1779,6 +1713,7 @@ def bin_secondary_along_primary_axis( x, y, x_start, x_stop, x_bin ):
 	x_mid:		The middle bins of the rebinned primary axis.
 	y_sum:		The secondary axis binned according to the bins along the primary axis.
 	
+	
 	'''
 	
 	
@@ -1798,29 +1733,56 @@ def bin_secondary_along_primary_axis( x, y, x_start, x_stop, x_bin ):
 
 
 
-def my_histogram_according_to_given_integers( array ):
+
+def grossnoisy( detx, dety, gross_cutoff ):
 	
 	
 	'''
+	
 	
 	Parameters
 	-----------
-	array:		Array, which contains only integer values, which is to be histogram-ed according to these histograms.
+	detx					:		1-D array, with data containing detx values of all primary events.
+	dety					:		Corresponding dety values.
+	gross_cutoff			:		The value of the "n" in the "n+-sigma cutoff to be imposed on the data.
 	
 	Returns
 	-----------
-	hist:		The number of elements along the unique elements of sorted "array".
+	indices_to_flag			:	The indices in the given arrays ("detx" and "dety") which correspind to data from the identified gross-noisy pixels.
+	overall_livetime_factor	:	The overall livetime factor with which previous livetimes are to be multiplied.
+	total_flagged			:	The total number of flagged pixels.			
 	
 	
 	'''
 	
 	
-	array	=	np.sort(array)
-	hist	=	np.array( [] )
-	for j, value in enumerate( np.unique(array) ):
-		
-		number	=	len( np.where( array == value )[0] )
-		hist	=	np.append( hist, number )
+	full_DPH	=	mf.create_full_DPH( detx, dety )
+	
+	#	To check how many of the pixels are flagged by the onboard software.
+	initially_flagged	=	len( np.where( full_DPH == 0 )[0] )
+	print '\nAlready flagged pixels:			' ,  initially_flagged
+	
+	#	To mask the pixels with zero counts before flagging, for subsequent analysis.
+	full_DPH	=	ma.masked_equal( full_DPH, 0 )
+	
+	#	To apply the iterative 5-sigma clipping based on the DPH.
+	clipped_DPH	=	sigma_clip( data = full_DPH, sigma_lower = 100, sigma_upper = gross_cutoff )
+	indices_flagged	=	np.where( ma.getmask( clipped_DPH ) == True )
+	total_flagged	=	indices_flagged[0].shape[0]
+	print 'Number of gross noisy pixels:		', total_flagged - initially_flagged
+	print 'Total number of flagged pixels:		', total_flagged,'\n\n'
+	detx_flag, dety_flag	=	reverse_mapping( indices_flagged[0], indices_flagged[1] )
+	
+	indices_to_flag	=	np.array( [] )
+	for j, x in enumerate( detx_flag ):
+		y	=	dety_flag[j]
+		ind	=	np.where( (detx == x) & (dety==y) )[0]
+		indices_to_flag	=	np.append( indices_to_flag, ind )
+	
+	#	To calculate overall livetime factor
+	numerator	=	number_of_pixels_2D_per_Quadrant - total_flagged
+	denominator	=	number_of_pixels_2D_per_Quadrant - initially_flagged
+	overall_livetime_factor	=	numerator / denominator
 	
 	
-	return hist
+	return indices_to_flag, overall_livetime_factor, total_flagged
